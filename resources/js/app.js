@@ -3,7 +3,7 @@ import './bootstrap';
 import { createApp, h } from 'vue';
 import { createInertiaApp, Head, Link } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-import AppLayout from './Layouts/AppLayout.vue';
+import MainLayout from './Layouts/MainLayout.vue';
 
 createInertiaApp({
     title: title => `${title} - LaraVue App`,
@@ -11,7 +11,7 @@ createInertiaApp({
     resolve: name => {
         const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
         let page = pages[`./Pages/${name}.vue`]
-        page.default.layout = page.default.layout || AppLayout
+        // page.default.layout = page.default.layout || MainLayout
         return page;
     },
     setup({ el, App, props, plugin }) {
