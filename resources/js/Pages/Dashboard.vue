@@ -1,4 +1,5 @@
 <template>
+    <Head title="Dashboard" />
     <div class="dashboard p-6">
         <h1 class="text-3xl font-bold mb-6">{{ title }}</h1>
         {{ $page.props.app.name }}
