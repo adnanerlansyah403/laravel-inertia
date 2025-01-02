@@ -1,7 +1,7 @@
 <template>
     <div class="dashboard p-6">
         <h1 class="text-3xl font-bold mb-6">{{ title }}</h1>
-
+        {{ $page.props.app.name }}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div class="bg-white p-4 rounded-lg shadow">
                 <h3 class="text-lg font-semibold mb-2">Total Tasks</h3>
