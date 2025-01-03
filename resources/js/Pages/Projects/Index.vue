@@ -14,24 +14,24 @@
 
         <!-- Project List -->
         <div class="mt-8 flex flex-col">
-            <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="inline-block min-w-full py-2 align-middle">
+            <input type="text" v-model="search" @input="filterProjects" placeholder="Cari Projek..." class="mt-2 px-4 py-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500">
+            <div class="inline-block min-w-full py-2 align-middle">
                 <div class="overflow-hidden shadow-sm ring-1 ring-black ring-opacity-5">
                     <table class="min-w-full divide-y divide-gray-300">
                         <thead class="bg-gray-50">
                             <tr>
-                            <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
-                                Name
-                            </th>
-                            <th class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                Description
-                            </th>
-                            <th class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                Category
-                            </th>
-                            <th class="relative py-3.5 pl-3 pr-4">
-                                <span class="sr-only">Actions</span>
-                            </th>
+                                <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
+                                    Name
+                                </th>
+                                <th class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                    Description
+                                </th>
+                                <th class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                    Category
+                                </th>
+                                <th class="relative py-3.5 pl-3 pr-4">
+                                    <span class="sr-only">Actions</span>
+                                </th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200 bg-white">
@@ -55,7 +55,6 @@
                     </table>
                     <Pagination :links="projects.links" />
                 </div>
-                </div>
             </div>
         </div>
 
@@ -69,6 +68,7 @@
 
 <script setup>
 import { ref } from "vue";
+import { router } from '@inertiajs/vue3'
 import ProjectForm from "@/Components/ProjectForm.vue";
 import Pagination from "@/Components/Pagination.vue";
 import Modal from "@/Components/Modal.vue";
@@ -82,6 +82,18 @@ defineProps({
 })
 
 const showForm = ref(false);
+const search = ref('')
+
+const filterProjects = () => {
+    const query = {}
+    if(search.value) query.search = search.value
+    router.visit(`/projects`, {
+        method: 'get',
+        data: query,
+        preserveState: true,
+        replace: true,
+    });
+}
 
 </script>
 

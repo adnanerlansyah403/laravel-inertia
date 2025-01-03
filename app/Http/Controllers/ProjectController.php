@@ -9,10 +9,17 @@ use Illuminate\Http\Request;
 class ProjectController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
+        $query = Project::query();
+
+        if($request->has('search')) $query->where('name', 'like', '%' . $request->search . '%');
+
+        $projects = $query->paginate(10);
+
         return Inertia::render("Projects/Index", [
-            'projects' => Project::with('category')->latest()->paginate(2)
+            'projects' => $projects,
+            'filters' => $request->only('search'),
         ]);
     }
 
