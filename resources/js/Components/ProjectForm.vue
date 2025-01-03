@@ -6,7 +6,7 @@
                 type="text"
                 v-model="form.name"
                 placeholder="Masukkan nama projek..."
-                class="mt-1 px-4 py-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500"
+                class="mt-2 px-4 py-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500"
                 :class="{ 'border-red-500': form.errors.name }"
             >
             <div v-if="form.errors.name" class="text-red-500 text-sm mt-1">
@@ -19,7 +19,7 @@
                 v-model="form.description"
                 placeholder="Masukkan deskripsi projek..."
                 rows="3"
-                class="mt-1 px-4 py-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500"
+                class="mt-2 px-4 py-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500"
                 :class="{ 'border-red-500': form.errors.description }"
             ></textarea>
             <div v-if="form.errors.description" class="text-red-500 text-sm mt-1">
@@ -47,9 +47,14 @@ const form = useForm({
     description: ''
 })
 
+const emit = defineEmits(['success'])
+
 const submit = () => {
     form.post('/projects', {
-        onSuccess: () => form.reset()
+        onSuccess: () => {
+            form.reset()
+            emit('success')
+        }
     })
 }
 

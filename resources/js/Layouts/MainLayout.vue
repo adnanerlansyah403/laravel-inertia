@@ -14,7 +14,7 @@
                 <NavLink href="/dashboard" :active="$page.url.endsWith('/dashboard')">
                   Dashboard
                 </NavLink>
-                <NavLink href="/dashboard/projects" :active="$page.url.endsWith('/projects')">
+                <NavLink href="/projects" :active="$page.url.endsWith('/projects')">
                   Projects
                 </NavLink>
               </div>
