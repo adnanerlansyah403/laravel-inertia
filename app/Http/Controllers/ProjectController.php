@@ -12,7 +12,7 @@ class ProjectController extends Controller
     public function index()
     {
         return Inertia::render("Projects/Index", [
-            'projects' => Project::latest()->paginate(10)
+            'projects' => Project::with('category')->latest()->paginate(2)
         ]);
     }
 
