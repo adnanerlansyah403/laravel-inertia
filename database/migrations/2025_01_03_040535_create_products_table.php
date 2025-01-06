@@ -11,17 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('projects', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('category_id'); // Create the foreign key column
+            $table->integer('category_id');
             $table->string('name');
             $table->text('description')->nullable();
+            $table->string('image_url')->nullable();
+            $table->integer('price')->default(0);
             $table->timestamps();
-
-            // Define the foreign key constraint
-            $table->foreign('category_id')
-                ->references('id')
-                ->on('categories');
         });
     }
 
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('projects');
+        Schema::dropIfExists('products');
     }
 };

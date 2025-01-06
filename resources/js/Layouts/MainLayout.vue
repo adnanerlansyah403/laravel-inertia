@@ -17,6 +17,9 @@
                 <NavLink href="/projects" :active="$page.url.endsWith('/projects')">
                   Projects
                 </NavLink>
+                <NavLink href="/products" :active="$page.url.endsWith('/products')">
+                  Products
+                </NavLink>
               </div>
             </div>
           </div>

@@ -35,22 +35,24 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200 bg-white">
-                            <tr v-for="project in projects.data" :key="project.id">
-                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">
-                                    {{ project.name }}
-                                </td>
-                                <td class="px-3 py-4 text-sm text-gray-500">
-                                    {{ project.description }}
-                                </td>
-                                <td class="px-3 py-4 text-sm text-gray-500">
-                                    {{ project?.category?.name ?? 'Tidak ada Kategori' }}
-                                </td>
-                                <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium">
-                                    <Link :href="`/projects/${project.id}/edit`" class="text-indigo-600 hover:text-indigo-900">
-                                    Edit
-                                    </Link>
-                                </td>
-                            </tr>
+                            <template v-if="projects?.data">
+                                <tr v-for="project in projects?.data" :key="project?.id">
+                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">
+                                        {{ project.name }}
+                                    </td>
+                                    <td class="px-3 py-4 text-sm text-gray-500">
+                                        {{ project.description }}
+                                    </td>
+                                    <td class="px-3 py-4 text-sm text-gray-500">
+                                        {{ project?.category?.name ?? 'Tidak ada Kategori' }}
+                                    </td>
+                                    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium">
+                                        <Link :href="`/projects/${project.id}/edit`" class="text-indigo-600 hover:text-indigo-900">
+                                        Edit
+                                        </Link>
+                                    </td>
+                                </tr>
+                            </template>
                         </tbody>
                     </table>
                     <Pagination :links="projects.links" />
