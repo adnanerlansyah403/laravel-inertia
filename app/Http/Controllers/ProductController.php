@@ -31,4 +31,32 @@ class ProductController extends Controller
             'categories' => $categories
         ]);
     }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'category_id' => 'required|exists:categories,id',
+            'name' => 'required|max:255',
+            'description' => 'required',
+            'price' => 'required',
+            'image_url' => 'nullable|url'
+        ], [
+            '*.required' => ":attribute wajib di isi.",
+            '*.url' => ':attribute harus berupa link url.'
+        ], [
+            'name' => 'Nama',
+            'category_id' => 'Kategori',
+            'price' => 'Harga',
+            'description' => 'Deskripsi',
+            'image_url' => 'Gambar'
+        ]);
+
+        dd($validated);
+
+        Product::create($validated);
+
+        return redirect()->route('products.index')
+            ->with('message', 'Produk berhasil dibuat!');
+    }
+
 }

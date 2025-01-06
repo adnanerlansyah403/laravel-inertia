@@ -16,5 +16,6 @@ Route::post('/projects', [ProjectController::class, 'store'])->name('projects.st
 Route::prefix('/products')->name('products.')->controller(ProductController::class)->group(function() {
 
     Route::get('/', 'index');
+    Route::post('/', 'store');
 
 });

@@ -23,6 +23,9 @@
                     {{ category?.name }}
                 </option>
             </select>
+            <button @click="showForm = true;" type="button" class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700">
+                Tambah Projek
+            </button>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <template v-if="products?.data">
@@ -34,6 +37,15 @@
                 />
             </template>
         </div>
+
+        <!-- Form Modal -->
+        <Modal :show="showForm" @close="showForm = false">
+            <ProductForm
+                :categories="categories"
+                @success="showForm = false"
+            />
+        </Modal>
+
     </div>
 </template>
 
@@ -42,6 +54,8 @@ import ProductCard from "@/Components/ProductCard.vue";
 import debounce from "debounce";
 import { computed, ref } from "vue";
 import { router } from "@inertiajs/vue3";
+import ProductForm from "@/Components/ProductForm.vue";
+import Modal from "@/Components/Modal.vue";
 
 // Props
 const props = defineProps({
@@ -53,6 +67,7 @@ const props = defineProps({
 });
 
 // Reactive State
+const showForm = ref(false);
 const search = ref("");
 const selectedCategory = ref("");
 
