@@ -6,6 +6,7 @@ use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Validation\ValidationException;
 
@@ -58,6 +59,8 @@ class AuthController extends Controller
     {
         try {
             $credentials = $request->validated();
+
+            $credentials['password'] = Hash::make($credentials['password']);
 
             User::create($credentials);
 

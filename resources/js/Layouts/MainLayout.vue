@@ -62,7 +62,7 @@ watch(() => props.dark_mode, (newVal) => {
 });
 
 // Kelas tombol tergantung pada tema
-const buttonClass = computed(() => (darkMode.value ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'));
+const buttonClass = computed(() => (darkMode.value ? 'bg-white text-gray-800' : 'bg-gray-800 text-white'));
 
 const toggleTheme = () => {
    router.post('/theme/toggle', {}, {
