@@ -1,5 +1,5 @@
 <template>
-    <div class="border border-gray-300 rounded-lg p-4 mb-4">
+    <div class="border border-gray-300 bg-white rounded-lg p-4 mb-4">
       <div class="mb-4">
         <img
           class="w-full h-auto rounded-md"
@@ -8,8 +8,10 @@
         />
       </div>
       <div>
-        <h3 class="text-lg font-semibold">{{ product?.name }}</h3>
-        <p class="text-gray-700">{{ formatPrice(product?.price) }}</p>
+        <Link as="button" :href="`/products/${product?.id}`">
+            <h3 class="text-lg font-semibold">{{ product?.name }}</h3>
+        </Link>
+            <p class="text-gray-700">{{ formatPrice(product?.price) }}</p>
         <div class="flex items-center gap-2 mt-2">
             <button
               @click="addToCart"

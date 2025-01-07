@@ -67,6 +67,7 @@ import { useForm } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
 
 const props = defineProps({
+    product: Object,
     categories: Array
 })
 
@@ -79,11 +80,11 @@ const categoryOptions = computed(() =>
 );
 
 const form = useForm({
-    category_id: '',
-    name: '',
-    price: 0,
-    description: '',
-    image_url: '',
+    category_id: props?.product?.id ?? '',
+    name: props?.product?.name ?? '',
+    price: props?.product?.price ?? 0,
+    description: props?.product?.description ?? '',
+    image_url: props?.product?.image_url ?? '',
 })
 
 const submitForm = () => {

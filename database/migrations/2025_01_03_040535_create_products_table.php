@@ -18,6 +18,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('image_url')->nullable();
             $table->integer('price')->default(0);
+            $table->integer('stock')->default(0);
+            $table->boolean('is_active')->default(1);
             $table->timestamps();
         });
     }
