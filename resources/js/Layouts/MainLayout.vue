@@ -22,7 +22,13 @@
                 </NavLink>
               </div>
             </div>
-            <!-- <NavLink href="/auth/logout">Sign Out</NavLink> -->
+            <div class="flex items-center gap-2">
+                <button @click="toggleTheme" :class="buttonClass" :disabled="loading" class="px-1 pt-1 pb-2">
+                    <span v-if="loading">Switching...</span>
+                    <span v-else>{{ darkMode ? 'Light Mode' : 'Dark Mode' }}</span>
+                </button>
+                <NavLink href="/auth/logout">Sign Out</NavLink>
+            </div>
           </div>
         </div>
       </nav>
@@ -39,5 +45,36 @@
 
 <script setup>
 import NavLink from '@/Components/NavLink.vue'
+import { router } from '@inertiajs/vue3';
+import { computed, ref, watch } from 'vue';
 
+const props = defineProps({
+    dark_mode: Boolean
+});
+
+// Dark mode berasal dari shared data di Inertia
+const darkMode = ref(props.dark_mode || false);
+const loading = ref(false);
+
+// Update local state jika shared data berubah
+watch(() => props.dark_mode, (newVal) => {
+    darkMode.value = newVal;
+});
+
+// Kelas tombol tergantung pada tema
+const buttonClass = computed(() => (darkMode.value ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'));
+
+const toggleTheme = () => {
+   router.post('/theme/toggle', {}, {
+        onSuccess: () => {
+            // Setelah sukses, toggle tema secara lokal
+            darkMode.value = !darkMode.value;
+            if(darkMode.value) document.querySelector('html').classList.toggle('dark')
+            else document.querySelector('html').classList.remove('dark')
+        },
+        onFinish: () => {
+            loading.value = false;
+        }
+    });
+}
 </script>

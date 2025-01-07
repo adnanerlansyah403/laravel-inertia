@@ -3,6 +3,7 @@
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\DashboardController;
@@ -37,5 +38,7 @@ Route::middleware('guest')->prefix('/auth')->name('auth.')->controller(AuthContr
     Route::post('/register', 'register')->name('store.register')->middleware(HandlePrecognitiveRequests::class);
 
 });
+
+Route::post('/theme/toggle', [ThemeController::class, 'toggle'])->name('theme.toggle');
 
 Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');

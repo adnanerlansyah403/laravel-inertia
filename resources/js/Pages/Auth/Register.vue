@@ -10,7 +10,7 @@
                     type="email"
                     id="email"
                     v-model="form.email"
-                    @change="form.validate('email')"
+                    @input="form.validate('email')"
                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required
                 />
@@ -24,7 +24,7 @@
                     type="text"
                     id="name"
                     v-model="form.name"
-                    @change="form.validate('name')"
+                    @input="form.validate('name')"
                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required
                 />
@@ -38,7 +38,7 @@
                     type="tel"
                     id="phone"
                     v-model="form.phone"
-                    @change="form.validate('phone')"
+                    @input="form.validate('phone')"
                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required
                 />
@@ -52,7 +52,7 @@
                     type="text"
                     id="address"
                     v-model="form.address"
-                    @change="form.validate('address')"
+                    @input="form.validate('address')"
                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required
                 />
@@ -66,7 +66,7 @@
                     type="password"
                     id="password"
                     v-model="form.password"
-                    @change="form.validate('password')"
+                    @input="form.validate('password')"
                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required
                 />
@@ -80,7 +80,7 @@
                     type="password"
                     id="password_confirmation"
                     v-model="form.password_confirmation"
-                    @change="form.validate('password_confirmation')"
+                    @input="form.validate('password_confirmation')"
                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required
                 />
