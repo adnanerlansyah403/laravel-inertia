@@ -10,24 +10,54 @@
                     type="email"
                     id="email"
                     v-model="form.email"
+                    @change="form.validate('email')"
                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required
                 />
-                <div v-if="form.errors.email" class="text-red-500 text-sm mt-1">
-                    {{ form.errors.email }}
+                <div v-if="form.invalid('email')" class="text-red-500 text-sm mt-1">
+                    {{ form.errors['email'] }}
                 </div>
             </div>
             <div>
-                <label for="email" class="block text-sm font-medium text-gray-700">Nama</label>
+                <label for="name" class="block text-sm font-medium text-gray-700">Nama</label>
                 <input
                     type="text"
                     id="name"
                     v-model="form.name"
+                    @change="form.validate('name')"
                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required
                 />
-                <div v-if="form.errors.name" class="text-red-500 text-sm mt-1">
-                    {{ form.errors.name }}
+                <div v-if="form.invalid('name')" class="text-red-500 text-sm mt-1">
+                    {{ form.errors['name'] }}
+                </div>
+            </div>
+            <div>
+                <label for="phone" class="block text-sm font-medium text-gray-700">Nomor Telepon</label>
+                <input
+                    type="tel"
+                    id="phone"
+                    v-model="form.phone"
+                    @change="form.validate('phone')"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required
+                />
+                <div v-if="form.invalid('phone')" class="text-red-500 text-sm mt-1">
+                    {{ form.errors['phone'] }}
+                </div>
+            </div>
+            <div>
+                <label for="address" class="block text-sm font-medium text-gray-700">Alamat</label>
+                <input
+                    type="text"
+                    id="address"
+                    v-model="form.address"
+                    @change="form.validate('address')"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required
+                />
+                <div v-if="form.invalid('address')" class="text-red-500 text-sm mt-1">
+                    {{ form.errors['address'] }}
                 </div>
             </div>
             <div>
@@ -36,18 +66,33 @@
                     type="password"
                     id="password"
                     v-model="form.password"
+                    @change="form.validate('password')"
                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required
                 />
-                <div v-if="form.errors.password" class="text-red-500 text-sm mt-1">
-                    {{ form.errors.password }}
+                <div v-if="form.invalid('password')" class="text-red-500 text-sm mt-1">
+                    {{ form.errors['password'] }}
+                </div>
+            </div>
+            <div>
+                <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Konfirmasi Password</label>
+                <input
+                    type="password"
+                    id="password_confirmation"
+                    v-model="form.password_confirmation"
+                    @change="form.validate('password_confirmation')"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required
+                />
+                <div v-if="form.invalid('password_confirmation')" class="text-red-500 text-sm mt-1">
+                    {{ form.errors['password_confirmation'] }}
                 </div>
             </div>
             <button
                 type="submit"
                 class="w-full py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none"
             >
-                Daftar
+                {{ form.processing ? 'Mendaftar...' : 'Daftar' }}
             </button>
         </form>
         <p class="text-center mt-4">
@@ -57,17 +102,23 @@
 </template>
 
 <script setup>
-import { useForm } from '@inertiajs/vue3';
+import { useForm } from 'laravel-precognition-vue-inertia';
 import AuthLayout from '@/Layouts/AuthLayout.vue'
 
 defineOptions({ layout: AuthLayout })
 
-const form = useForm({ name: '', email: '', password: '' })
+const form = useForm('post', '/auth/register', {
+    name: '',
+    email: '',
+    password: '',
+    password_confirmation: '',
+    phone: '',
+    address: '',
+})
 
-const submit = () => form.post('/auth/register');
+const submit = () => form.submit({
+    preserveScroll: true,
+    onSuccess: () => form.reset()
+})
 
 </script>
-
-<style scoped>
-
-</style>

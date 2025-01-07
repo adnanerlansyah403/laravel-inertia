@@ -34,6 +34,8 @@ Route::middleware('guest')->prefix('/auth')->name('auth.')->controller(AuthContr
     Route::post('/login', 'login')->name('store.login');
 
     Route::get('/register', 'showRegister')->name('show.register');
-    Route::post('/register', 'register')->name('store.register');
+    Route::post('/register', 'register')->name('store.register')->middleware(HandlePrecognitiveRequests::class);
 
 });
+
+Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');

@@ -22,6 +22,7 @@
                 </NavLink>
               </div>
             </div>
+            <!-- <NavLink href="/auth/logout">Sign Out</NavLink> -->
           </div>
         </div>
       </nav>

@@ -6,6 +6,7 @@ use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\RegisterRequest;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
@@ -53,21 +54,10 @@ class AuthController extends Controller
         return Inertia::render('Auth/Register');
     }
 
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
         try {
-            //code...
-            $credentials = $request->validate([
-                'name' => 'required',
-                'email' => 'required|email',
-                'password' => 'required',
-            ], [
-                '*.required' => ':attribute wajib diisi',
-                'email.email' => 'Email harus valid',
-            ], [
-                'email' => 'Email',
-                'password' => 'Password'
-            ]);
+            $credentials = $request->validated();
 
             User::create($credentials);
 
