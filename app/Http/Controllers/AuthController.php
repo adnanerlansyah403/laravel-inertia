@@ -42,7 +42,7 @@ class AuthController extends Controller
 
             $request->session()->regenerate();
 
-            return to_route('dashboard')->with('success', 'Selamat datang di halaman dashboard');
+            return to_route('dashboard')->with('message', 'Selamat datang di halaman dashboard');
         } catch (ValidationException $e) {
             return back()->withErrors($e->errors());
         } catch (Exception $e) {
@@ -64,7 +64,7 @@ class AuthController extends Controller
 
             User::create($credentials);
 
-            return to_route('auth.show.login')->with('success', 'Berhasil membuat akun baru');
+            return to_route('auth.show.login')->with('message', 'Berhasil membuat akun baru');
         } catch (ValidationException $e) {
             return back()->withErrors($e->errors());
         } catch (Exception $e) {
@@ -82,7 +82,7 @@ class AuthController extends Controller
             request()->session()->regenerateToken();
 
 
-            return to_route('auth.show.login')->with('success', 'Berhasil melakukan logout');
+            return to_route('auth.show.login')->with('message', 'Berhasil melakukan logout');
         } catch (\Exception $e) {
             return back()->with('danger', 'Ada kesalahan pada saat mencoba logout');
         }
