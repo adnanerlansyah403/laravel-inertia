@@ -40,13 +40,14 @@
                 placeholder="Masukkan deskripsi produk..."
             />
 
+            <!-- File Input -->
             <TextField
                 id="product-image"
+                label="Gambar"
+                type="file"
                 v-model="form.image"
-                label="Gambar URL"
-                type="url"
                 :error="form.errors.image"
-                placeholder="Masukkan url gambar..."
+                placeholder="Masukkan gambar..."
             />
         </div>
 
@@ -84,8 +85,14 @@ const form = useForm({
     name: props?.product?.name ?? '',
     price: props?.product?.price ?? 0,
     description: props?.product?.description ?? '',
-    image_url: props?.product?.image_url ?? '',
+    image: null,
 })
+
+// Handle File Input
+const handleFileChange = (event) => {
+    const file = event.target.files[0]; // Get the first selected file
+    form.image = file; // Assign file to the form's image property
+};
 
 const submitForm = () => {
     form.post('/products', {

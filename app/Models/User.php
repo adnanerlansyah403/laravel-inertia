@@ -46,7 +46,7 @@ class User extends Authenticatable
         ];
     }
 
-    public function hasRole($roles = []): bool
+    public function hasRole($user, $roles = []): bool
     {
         return in_array($user->role_id, $roles);
     }

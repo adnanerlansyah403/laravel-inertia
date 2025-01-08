@@ -18,7 +18,7 @@ Route::middleware('auth')->group(function() {
     Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
     Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
 
-    Route::prefix('/products')->name('products.')->controller(ProductController::class)->group(function() {
+    Route::middleware('checkPermission:1')->prefix('/products')->name('products.')->controller(ProductController::class)->group(function() {
 
         Route::get('/', 'index')->name('index');
         Route::get('/{product}', 'edit')->name('edit');

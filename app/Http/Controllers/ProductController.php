@@ -22,7 +22,7 @@ class ProductController extends Controller
         });
 
         // Paginate the results
-        $products = $query->paginate(10);
+        $products = $query->latest()->paginate(10)->withQueryString();
 
         // Fetch categories (if you want to retrieve all categories)
         $categories = Category::all();
@@ -35,26 +35,14 @@ class ProductController extends Controller
 
     public function store(ProductRequest $request)
     {
-        // $validated = $request->validate([
-        //     'category_id' => 'required|exists:categories,id',
-        //     'name' => 'required|max:255',
-        //     'description' => 'required',
-        //     'price' => 'required',
-        //     'image_url' => 'nullable|url'
-        // ], [
-        //     '*.required' => ":attribute wajib di isi.",
-        //     '*.url' => ':attribute harus berupa link url.'
-        // ], [
-        //     'name' => 'Nama',
-        //     'category_id' => 'Kategori',
-        //     'price' => 'Harga',
-        //     'description' => 'Deskripsi',
-        //     'image_url' => 'Gambar'
-        // ]);
-
         $data = $request->validated();
 
         dd($data);
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')
+                ->store('products', 'public');
+        }
 
         Product::create($validated);
 

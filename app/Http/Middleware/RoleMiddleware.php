@@ -13,9 +13,9 @@ class RoleMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        if (!$request->user()->hasRole($roles)) {
+        if (!$request->user()->hasRole(auth()->user(), $roles)) {
             abort(403, 'Akses tidak diizinkan');
         }
 
