@@ -72,6 +72,8 @@ const props = defineProps({
     categories: Array
 })
 
+const emit = defineEmits(['success'])
+
 // Reactive States
 const categoryOptions = computed(() =>
   props.categories.map(({ id, name }) => ({
@@ -87,12 +89,6 @@ const form = useForm({
     description: props?.product?.description ?? '',
     image: null,
 })
-
-// Handle File Input
-const handleFileChange = (event) => {
-    const file = event.target.files[0]; // Get the first selected file
-    form.image = file; // Assign file to the form's image property
-};
 
 const submitForm = () => {
     form.post('/products', {

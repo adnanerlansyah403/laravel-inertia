@@ -19,7 +19,7 @@
         >
             <!-- Select options -->
             <template v-if="type === 'select'">
-                <option value="" disabled>{{ placeholder }}</option>
+                <option value="" selected disabled>{{ placeholder }}</option>
                 <option :value="option.value" v-for="option in options" :key="option.value">
                     {{ option.label }}
                 </option>

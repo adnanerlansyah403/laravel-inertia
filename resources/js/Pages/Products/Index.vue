@@ -52,7 +52,7 @@
 <script setup>
 import ProductCard from "@/Components/ProductCard.vue";
 import debounce from "debounce";
-import { computed, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import { router } from "@inertiajs/vue3";
 import ProductForm from "@/Components/ProductForm.vue";
 import Modal from "@/Components/Modal.vue";

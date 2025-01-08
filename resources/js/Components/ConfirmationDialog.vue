@@ -67,7 +67,7 @@ const handleAnimationEnd = () => {
 };
 </script>
 
-<style>
+<style scoped>
 /* Tambahkan animasi untuk modal */
 .bg-white {
     animation: fadeIn 0.3s ease-out;

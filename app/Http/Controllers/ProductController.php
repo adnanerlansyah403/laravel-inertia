@@ -37,14 +37,12 @@ class ProductController extends Controller
     {
         $data = $request->validated();
 
-        dd($data);
-
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')
                 ->store('products', 'public');
         }
 
-        Product::create($validated);
+        Product::create($data);
 
         return redirect()->route('products.index')
             ->with('message', 'Produk berhasil dibuat!');
