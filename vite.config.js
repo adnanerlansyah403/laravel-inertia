@@ -10,4 +10,8 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    test: {
+        globals: true, // Mengaktifkan API global seperti `describe`, `it`, dll.
+        environment: 'jsdom', // Gunakan jsdom untuk simulasi DOM
+    },
 });
