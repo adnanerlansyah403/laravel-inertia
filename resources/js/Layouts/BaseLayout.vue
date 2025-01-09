@@ -22,7 +22,6 @@ import FlashMessage from '@/Components/FlashMessage.vue'; // Path to the FlashMe
   // Watch for changes in flash.message
   watch(() => props, (newMessage) => {
     // flashMessage.value = newMessage;  // Update the flash message if it changes
-    console.log('test')
     if (newMessage) {
       setTimeout(() => {
         flashMessage.value = null;  // Hide the message after 5 seconds
